@@ -1,6 +1,6 @@
-FROM debian:stretch
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's Debian stretch OS base image" Vendor="Packet.net" Version="1.0"
+FROM debian:buster
+MAINTAINER Aleksandr Nesterenko <anesterenko@cloudlinux.com>
+LABEL Description="Packet's Debian buster OS base image" Vendor="Packet.net" Version="1.0"
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -15,6 +15,7 @@ RUN apt-get -q update && \
 		bc \
 		ca-certificates \
 		cloud-init \
+		jq \
 		cron \
 		curl \
 		dbus \
@@ -32,7 +33,6 @@ RUN apt-get -q update && \
 		iperf \
 		iptables \
 		iputils-ping \
-		jq \
 		less \
 		libmlx5-1 \
 		locales \
@@ -77,8 +77,8 @@ RUN apt-get -q update && \
 # Install a specific kernel
 RUN apt-get -q update && \
     apt-get -y -qq install \
-    linux-image-4.9.0-5-amd6 \
-    && apt-get -y remove --purge linux-image-4.9.0-5-amd64-dbg
+    linux-image-4.19.0-12-amd64 \
+    && apt-get -y remove --purge linux-image-4.19.0-12-amd64-dbg
 
 # Assign default target
 RUN systemctl set-default multi-user
